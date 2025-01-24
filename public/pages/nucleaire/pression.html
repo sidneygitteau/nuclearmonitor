@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Nuclear Monitor - Pression</title>
+
+    <!-- Styles et dépendances du template -->
+    <link
+      rel="stylesheet"
+      href="../../assets/vendors/mdi/css/materialdesignicons.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/vendors/css/vendor.bundle.base.css" />
+    <link rel="stylesheet" href="../../assets/css/style.css" />
+    <link rel="shortcut icon" href="../../assets/images/favicon.png" />
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+      /* On décale la zone principale sur la droite pour laisser place à la sidebar élargie */
+      .main-panel {
+        margin-left: 4%; 
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container-scroller">
+      <!-- SIDEBAR -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <div
+          class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top"
+        >
+          <a class="sidebar-brand brand-logo" href="#"
+            ><img
+              src="../../assets/images/logo-nuclear-monitor.svg"
+              alt="logo"
+              style="margin-left: 35px; width: 120px; height: auto;"
+          /></a>
+        </div>
+        <ul class="nav">
+          <li class="nav-item nav-category">
+            <span class="nav-link">Navigation</span>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="/">
+              <span class="menu-icon">
+                <i class="mdi mdi-home"></i>
+              </span>
+              <span class="menu-title">Accueil</span>
+            </a>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="/temperature">
+              <span class="menu-icon">
+                <i class="mdi mdi-oil-temperature"></i>
+              </span>
+              <span class="menu-title">Températures</span>
+            </a>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="/pression">
+              <span class="menu-icon">
+                <i class="mdi mdi-av-timer"></i>
+              </span>
+              <span class="menu-title">Pression</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- MAIN PANEL -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <!-- NAVBAR HAUTE -->
+          <nav class="navbar p-0 fixed-top d-flex flex-row justify-content-center align-items-center">
+            <ul class="nav-item w-100 text-center mt-2">
+              <h3 class="page-title fs-1 fw-bold">Capteurs de Pression</h3>
+            </ul>
+          </nav>
+
+          <!-- SECTION : Bar Chart -->
+          <div class="row mt-5">
+            <div class="col-lg-8 mx-auto">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Comparaison des Capteurs (Bar Chart)</h4>
+                  <canvas id="barChart"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION : 3 line charts -->
+          <div class="row mt-4">
+            <div class="col-lg-4">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Capteur 1</h4>
+                  <canvas id="lineChart1"></canvas>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Capteur 2</h4>
+                  <canvas id="lineChart2"></canvas>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Capteur 3</h4>
+                  <canvas id="lineChart3"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div> <!-- end content-wrapper -->
+      </div> <!-- end main-panel -->
+    </div> <!-- end container-scroller -->
+
+    <!-- Scripts pour les graphiques -->
+    <script>
+      // Bar Chart pour la comparaison de 3 capteurs
+      new Chart(document.getElementById("barChart"), {
+          type: 'bar',
+          data: {
+              labels: ["Capteur 1", "Capteur 2", "Capteur 3"],
+              datasets: [{
+                  label: "Pression (bars)",
+                  data: [0.7, 0.8, 0],
+                  backgroundColor: ["blue", "green", "red"]
+              }]
+          }
+      });
+      
+      // Fonction utilitaire pour créer un line chart
+      function createLineChart(ctx) {
+          return new Chart(ctx, {
+              type: 'line',
+              data: {
+                  labels: [],
+                  datasets: [{
+                      label: "Évolution Pression",
+                      data: [],
+                      borderColor: "blue",
+                      fill: false
+                  }]
+              }
+          });
+      }
+
+      // Création des 3 line charts (un par capteur)
+      createLineChart(document.getElementById("lineChart1"));
+      createLineChart(document.getElementById("lineChart2"));
+      createLineChart(document.getElementById("lineChart3"));
+    </script>
+  </body>
+</html>

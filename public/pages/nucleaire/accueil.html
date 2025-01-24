@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Nuclear Monitor</title>
+
+    <link
+      rel="stylesheet"
+      href="../../assets/vendors/mdi/css/materialdesignicons.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/vendors/css/vendor.bundle.base.css" />
+    <link rel="stylesheet" href="../../assets/css/style.css" />
+    <link rel="shortcut icon" href="../../assets/images/favicon.png" />
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+      /* On décale la zone principale sur la droite pour laisser place à la sidebar agrandie */
+      .main-panel {
+        margin-left: 4%; 
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <div class="container-scroller">
+      <!-- NAVBAR HAUTE -->
+      <nav
+        class="navbar p-0 fixed-top d-flex flex-row justify-content-center align-items-center"
+      >
+        <ul class="nav-item w-100 text-center mt-2">
+          <h3 class="page-title fs-1 fw-bold">Accueil</h3>
+        </ul>
+      </nav>
+
+      <!-- SIDEBAR -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar" >
+        <div
+          class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top"
+        >
+          <a class="sidebar-brand brand-logo" href="#"
+            ><img
+              src="../../assets/images/logo-nuclear-monitor.svg"
+              alt="logo"
+              style="margin-left: 35px; width: 120px; height: auto;"
+          /></a>
+        </div>
+        <ul class="nav">
+          <li class="nav-item nav-category">
+            <span class="nav-link">Navigation</span>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="/">
+              <span class="menu-icon">
+                <i class="mdi mdi-home"></i>
+              </span>
+              <span class="menu-title">Accueil</span>
+            </a>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="/temperature">
+              <span class="menu-icon">
+                <i class="mdi mdi-oil-temperature"></i>
+              </span>
+              <span class="menu-title">Températures</span>
+            </a>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="/pression">
+              <span class="menu-icon">
+                <i class="mdi mdi-av-timer"></i>
+              </span>
+              <span class="menu-title">Pression</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- MAIN PANEL -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <!-- SECTION : Présentation du projet -->
+          <div class="row mt-4">
+            <div class="col-lg-12 mx-auto">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Présentation du Projet</h4>
+                  <p>
+                    Ce projet de monitoring permet de suivre en temps réel plusieurs
+                    paramètres critiques tels que la temperature et la pression dans un contexte de
+                    supervision d'une centrale nucléaire.  
+                    Son but est d’afficher les données collectées dans un tableau de bord clair
+                    et dynamique, et de permettre aux utilisateurs de naviguer entre
+                    différentes pages thématiques (accueil, températures, pression).
+                  </p>
+                  <p>
+                    Le projet simule des données capturées au sein d'une centrale nucléaire.
+                    J'ai essayé de faire en sorte que les données soient cohérentes à la réalité.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION : Technologies utilisées -->
+          <div class="row mt-4">
+            <div class="col-lg-12 mx-auto">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Technologies et Crédits</h4>
+                  <ul>
+                    <li><strong>Node.js</strong> : pour le backend (serveur, API)</li>
+                    <li><strong>JavaScript</strong> : logique front (Chart.js, appels API)</li>
+                    <li><strong>PostgreSQL</strong> : base de données pour stocker les mesures</li>
+                    <li><strong>HTML/CSS</strong> : structure et style du dashboard</li>
+                    <li><strong>Bootstrap & Corona Free Dark Admin Template</strong> : mise en page et thème visuel</li>
+                  </ul>
+                  <p>
+                    Grâce à cette stack technique, le projet peut collecter et afficher des données en 
+                    temps réel, offrant des visualisations interactives (graphiques) et une structure 
+                    modulaire (plusieurs pages et routes).
+                  </p>
+                  <p>
+                    Le design est basé sur le template 
+                    offrant une interface moderne et responsive.
+                  </p>
+                  <p>
+                    Je remercie Jonathan Colo 
+                    <a
+                      href="https://www.linkedin.com/in/jonathancolo"
+                      target="_blank"
+                    >
+                      (LinkedIn)
+                    </a>
+                    pour la création du logo de ce projet.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION : visualisation  -->
+          <div class="row mt-4">
+            <div class="col-lg-5 mx-auto">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title" style="text-transform: none;">
+                    Exemple d’un graphique en anneau illustrant la répartition de la production
+                    d’électricité par EDF en 2023
+                    <a href="https://www.edf.fr/sites/groupe/files/2024-04/annual-results-2023-facts-and-figures-en-2024-04-23.pdf"
+                      target="_blank">(source)</a>
+                  </h4>
+                  <canvas id="doughnutChart" style="height:250px"></canvas>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-5 mx-auto">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title" style="text-transform: none;">
+                    Exemple d’un graphique en anneau illustrant la répartition de la puissance de production d’EDF en 2023
+                    <a 
+                      href="https://www.edf.fr/sites/groupe/files/2024-04/annual-results-2023-facts-and-figures-en-2024-04-23.pdf"
+                      target="_blank"
+                    >(source)</a>
+                  </h4>
+                  <canvas id="doughnutChart2" style="height:250px"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- end main-panel -->
+    </div><!-- end container-scroller -->
+
+    <script>
+      new Chart(document.getElementById("doughnutChart"), {
+        type: "doughnut",
+        data: {
+          labels: [
+            "Nucléaire",
+            "Hydraulique",
+            "Gaz",
+            "Autre énergies renouvelables",
+            "Pétrole",
+            "Charbon"
+          ],
+          datasets: [
+            {
+              data: [78, 9, 6, 6, 0.42, 0.2],
+              backgroundColor: [
+                "#FFAC33",
+                "#010FDD",
+                "#FF7E05",
+                "#13BD00",
+                "#8C8C8C",
+                "#BFBFBF"
+              ]
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: "bottom"
+            },
+            tooltip: {
+              callbacks: {
+                label: function (contexte) {
+                  const label = contexte.label || "";
+                  const valeurActuelle = contexte.parsed;
+                  return `${label} : ${valeurActuelle}%`;
+                }
+              }
+            }
+          }
+        }
+      });
+
+      new Chart(document.getElementById("doughnutChart2"), {
+        type: "doughnut",
+        data: {
+          labels: [
+            "Nucléaire",
+            "Hydraulique",
+            "Gaz",
+            "Autre énergies renouvelables",
+            "Pétrole",
+            "Charbon"
+          ],
+          datasets: [
+            {
+              data: [58, 18, 10, 10, 3, 1],
+              backgroundColor: [
+                "#FFAC33",
+                "#010FDD",
+                "#FF7E05",
+                "#13BD00",
+                "#8C8C8C",
+                "#BFBFBF"
+              ]
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: "bottom"
+            },
+            tooltip: {
+              callbacks: {
+                label: function (contexte) {
+                  const label = contexte.label || "";
+                  const valeurActuelle = contexte.parsed;
+                  return `${label} : ${valeurActuelle}%`;
+                }
+              }
+            }
+          }
+        }
+      });
+
+
+    </script>
+  </body>
+</html>
