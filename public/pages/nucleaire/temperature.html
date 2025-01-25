@@ -5,19 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Nuclear Monitor - Températures</title>
 
-    <!-- Styles pour la navbar et le layout -->
     <link rel="stylesheet" href="../../assets/vendors/mdi/css/materialdesignicons.min.css" />
     <link rel="stylesheet" href="../../assets/vendors/css/vendor.bundle.base.css" />
     <link rel="stylesheet" href="../../assets/css/style.css" />
     <link rel="shortcut icon" href="../../assets/images/favicon.png" />
 
-    <!-- Chart.js (chargé après les styles pour éviter les conflits) -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
-      /* Décale la zone principale pour laisser place à la sidebar */
       .main-panel {
-        margin-left: 4%; /* Ajustez selon la largeur de la sidebar */
+        margin-left: 4%; 
       }
     </style>
   </head>
@@ -83,7 +80,7 @@
             </ul>
           </nav>
 
-          <!-- SECTION : Comparaison des capteurs (Bar Chart) -->
+          <!-- Comparaison des capteurs (Bar Chart) -->
           <div class="row mt-4">
             <div class="col-lg-8 mx-auto">
               <div class="card">
@@ -95,7 +92,7 @@
             </div>
           </div>
 
-          <!-- SECTION : 3 line charts (un par capteur) -->
+          <!-- un lign chart par capteur) -->
           <div class="row mt-4">
             <div class="col-lg-4">
               <div class="card">
@@ -122,11 +119,11 @@
               </div>
             </div>
           </div>
-        </div> <!-- end content-wrapper -->
-      </div> <!-- end main-panel -->
-    </div> <!-- end container-scroller -->
+        </div> 
+      </div> 
+    </div> 
 
-    <!-- Scripts pour les graphiques -->
+    
     <script>
       // Bar Chart
       new Chart(document.getElementById("barChart"), {
@@ -143,12 +140,12 @@
         }
       });
 
-      // Fonction générique pour créer un line chart
+     //creation linechart
       function createLineChart(ctx) {
         return new Chart(ctx, {
           type: "line",
           data: {
-            labels: [], // A remplir avec vos données si besoin
+            labels: [], // a remplir avec les données
             datasets: [
               {
                 label: "Évolution Température",
