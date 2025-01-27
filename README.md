@@ -22,8 +22,6 @@ Video de présentation : https://youtu.be/UEIKXnJ5Hrs
   - [PostgreSQL](https://www.postgresql.org/)
   - [pgAdmin 4](https://www.pgadmin.org/) pour gérer la base de données via une interface graphique
 
-- **Autres Outils :**
-  - [dotenv](https://www.npmjs.com/package/dotenv) pour gérer les variables d'environnement
 
 ## Pré-requis
 
