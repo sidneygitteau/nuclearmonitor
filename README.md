@@ -6,18 +6,6 @@ Nuclear Monitor est une application web conçue pour surveiller en temps réel l
 
 Video de présentation : https://youtu.be/UEIKXnJ5Hrs
 
-## Table des Matières
-
-1. [Technologies Utilisées](#technologies-utilisees)
-2. [Pré-requis](#pre-requis)
-3. [Installation](#installation)
-4. [Configuration](#configuration)
-5. [Démarrage de l'Application](#demarrage-de-lapplication)
-6. [Utilisation](#utilisation)
-7. [Améliorations Futures](#ameliorations-futures)
-8. [Captures d'Écran](#captures-decran)
-9. [Licence](#licence)
-
 ## Technologies Utilisées
 
 - **Frontend :**
