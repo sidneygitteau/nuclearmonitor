@@ -122,7 +122,7 @@ Ouvrez votre navigateur et accédez aux URL suivantes pour visualiser les donné
 
 Voici quelques idées pour rendre l'application encore meilleure :
 
-Alertes en Temps Réel : \n
-Mettre en place des notifications en cas de dépassement des seuils de pression ou de température. \n
-Tests : \n
-Ajouter des tests unitaires et d'intégration pour assurer la fiabilité de l'application. \n
+Alertes en Temps Réel :  
+Mettre en place des notifications en cas de dépassement des seuils de pression ou de température.   
+Tests :   
+Ajouter des tests unitaires et d'intégration pour assurer la fiabilité de l'application.   
