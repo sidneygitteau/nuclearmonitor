@@ -25,7 +25,7 @@ const pool = new Pool({
 })
 */
   pool.connect();
-
+/*
   // Test de la connexion 
 pool.query('SELECT * from nuclear_measurements',(err,res)=>{
     if(!err){
@@ -34,7 +34,7 @@ pool.query('SELECT * from nuclear_measurements',(err,res)=>{
         console.log(err.message)
     }
     pool.end();
-})
+})*/
 
 app.use(express.static('public'));
 
@@ -49,6 +49,40 @@ app.get('/temperature', (req,res) => {
 
 app.get('/pression', (req,res) => {
     res.sendFile(path.join(__dirname,'/public/pages/nucleaire','pression.html'))
+});
+
+// Route API pour récupérer les 20 dernières données de pression
+app.get('/api/pressureData', async (req, res) => {
+  try {
+    const query = `
+      SELECT pressure_valve1, pressure_valve2, pressure_valve3, timestamp
+      FROM nuclear_measurements
+      ORDER BY id DESC  
+      LIMIT 20
+    `;
+    const result = await pool.query(query);
+    res.json(result.rows);  // renvoie un array d'objets JSON
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Erreur lors de la récupération des données' });
+  }
+});
+
+// Route API pour récupérer les 20 dernières données de température
+app.get('/api/temperatureData', async (req, res) => {
+  try {
+      const query = `
+          SELECT temp_pipe1, temp_pipe2, temp_pipe3, timestamp
+          FROM nuclear_measurements
+          ORDER BY id DESC
+          LIMIT 20
+      `;
+      const result = await pool.query(query);
+      res.json(result.rows); // Renvoie un array d'objets JSON
+  } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Erreur lors de la récupération des données de température' });
+  }
 });
 
 /*

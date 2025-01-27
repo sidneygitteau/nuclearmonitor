@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Nuclear Monitor - Températures</title>
@@ -17,151 +17,244 @@
         margin-left: 4%; 
       }
     </style>
-  </head>
+</head>
 
-  <body>
+<body>
     <div class="container-scroller">
-      <!-- SIDEBAR -->
-      <nav class="sidebar sidebar-offcanvas" id="sidebar">
-        <div
-          class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top"
-        >
-          <a class="sidebar-brand brand-logo" href="#"
-            ><img
-              src="../../assets/images/logo.svg"
-              alt="logo"
-              style="margin-left: 35px; width: 120px; height: auto;"
-          /></a>
-        </div>
-        <ul class="nav">
-          <li class="nav-item nav-category">
-            <span class="nav-link">Navigation</span>
-          </li>
-
-          <!-- Lien vers l'accueil -->
-          <li class="nav-item menu-items">
-            <a class="nav-link" href="/">
-              <span class="menu-icon">
-                <i class="mdi mdi-home"></i>
-              </span>
-              <span class="menu-title">Accueil</span>
-            </a>
-          </li>
-
-          <!-- Lien vers Températures -->
-          <li class="nav-item menu-items">
-            <a class="nav-link" href="/temperature">
-              <span class="menu-icon">
-                <i class="mdi mdi-oil-temperature"></i>
-              </span>
-              <span class="menu-title">Températures</span>
-            </a>
-          </li>
-
-          <!-- Lien vers Pression -->
-          <li class="nav-item menu-items">
-            <a class="nav-link" href="/pression">
-              <span class="menu-icon">
-                <i class="mdi mdi-av-timer"></i>
-              </span>
-              <span class="menu-title">Pression</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-
-      <!-- MAIN PANEL -->
-      <div class="main-panel">
-        <div class="content-wrapper">
-          <!-- NAVBAR HAUTE -->
-          <nav class="navbar p-0 fixed-top d-flex flex-row justify-content-center align-items-center">
-            <ul class="nav-item w-100 text-center mt-2">
-              <h3 class="page-title fs-1 fw-bold">Capteurs de Température</h3>
+        <!-- SIDEBAR -->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
+                <a class="sidebar-brand brand-logo" href="#">
+                    <img src="../../assets/images/logo-nuclear-monitor.svg" alt="logo" style="margin-left: 35px; width: 120px; height: auto;" />
+                </a>
+            </div>
+            <ul class="nav">
+                <li class="nav-item nav-category">
+                    <span class="nav-link">Navigation</span>
+                </li>
+                <!-- Lien vers l'accueil -->
+                <li class="nav-item menu-items">
+                    <a class="nav-link" href="/">
+                        <span class="menu-icon"><i class="mdi mdi-home"></i></span>
+                        <span class="menu-title">Accueil</span>
+                    </a>
+                </li>
+                <!-- Lien vers Températures -->
+                <li class="nav-item menu-items">
+                    <a class="nav-link" href="/temperature">
+                        <span class="menu-icon"><i class="mdi mdi-oil-temperature"></i></span>
+                        <span class="menu-title">Températures</span>
+                    </a>
+                </li>
+                <!-- Lien vers Pression -->
+                <li class="nav-item menu-items">
+                    <a class="nav-link" href="/pression">
+                        <span class="menu-icon"><i class="mdi mdi-av-timer"></i></span>
+                        <span class="menu-title">Pression</span>
+                    </a>
+                </li>
             </ul>
-          </nav>
+        </nav>
 
-          <!-- Comparaison des capteurs (Bar Chart) -->
-          <div class="row mt-4">
-            <div class="col-lg-8 mx-auto">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">Comparaison des Capteurs Température</h4>
-                  <canvas id="barChart"></canvas>
-                </div>
-              </div>
-            </div>
-          </div>
+        <!-- MAIN PANEL -->
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <!-- NAVBAR HAUTE -->
+                <nav class="navbar p-0 fixed-top d-flex flex-row justify-content-center align-items-center">
+                    <ul class="nav-item w-100 text-center mt-2">
+                        <h3 class="page-title fs-1 fw-bold">Capteurs de Température</h3>
+                    </ul>
+                </nav>
 
-          <!-- un lign chart par capteur) -->
-          <div class="row mt-4">
-            <div class="col-lg-4">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">Capteur 1</h4>
-                  <canvas id="lineChart1"></canvas>
+                <!-- SECTION : bar chart pour la DERNIÈRE VALEUR -->
+                <div class="row mt-5">
+                    <div class="col-lg-8 mx-auto">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Température Enregistrée</h4>
+                                <canvas id="barChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <div class="col-lg-4">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">Capteur 2</h4>
-                  <canvas id="lineChart2"></canvas>
+
+                <!-- SECTION : 3 line charts pour LES 20 DERNIÈRES valeurs -->
+                <div class="row mt-4">
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Circuit Primaire</h4>
+                                <canvas id="lineChart1"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Circuit Secondaire</h4>
+                                <canvas id="lineChart2"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Circuit de Refroidissement</h4>
+                                <canvas id="lineChart3"></canvas>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <div class="col-lg-4">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">Capteur 3</h4>
-                  <canvas id="lineChart3"></canvas>
-                </div>
-              </div>
-            </div>
-          </div>
+            </div> 
         </div> 
-      </div> 
     </div> 
 
-    
     <script>
-      // Bar Chart
-      new Chart(document.getElementById("barChart"), {
-        type: "bar",
-        data: {
-          labels: ["Capteur 1", "Capteur 2", "Capteur 3"],
-          datasets: [
-            {
-              label: "Température",
-              data: [0.7, 0.8, 0],
-              backgroundColor: ["blue", "green", "red"]
-            }
-          ]
-        }
-      });
+        // --- Chart.js GLOBALS ---
+        // Bar Chart context
+        const barCtx = document.getElementById("barChart").getContext("2d");
+        // 3 line charts context
+        const lineCtx1 = document.getElementById("lineChart1").getContext("2d");
+        const lineCtx2 = document.getElementById("lineChart2").getContext("2d");
+        const lineCtx3 = document.getElementById("lineChart3").getContext("2d");
 
-     //creation linechart
-      function createLineChart(ctx) {
-        return new Chart(ctx, {
-          type: "line",
-          data: {
-            labels: [], // a remplir avec les données
-            datasets: [
-              {
-                label: "Évolution Température",
-                data: [],
-                borderColor: "blue",
-                fill: false
-              }
-            ]
-          }
+        // --- Création du Bar Chart (pour la dernière valeur) ---
+        let barChart = new Chart(barCtx, {
+            type: "bar",
+            data: {
+                labels: ["Température Enregistrée"], // Single label on x-axis
+                datasets: [
+                    {
+                        label: "Circuit Primaire (290-320°C)",
+                        data: [0],
+                        backgroundColor: "#1C2942",
+                    },
+                    {
+                        label: "Circuit Secondaire (270-290°C)",
+                        data: [0],
+                        backgroundColor: "#3B556D",
+                    },
+                    {
+                        label: "Circuit de Refroidissement (25-40°C)",
+                        data: [0],
+                        backgroundColor: "#5FC2BA",
+                    },
+                ],
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Température (°C)'
+                        }
+                    },
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                    },
+                },
+            },
         });
-      }
 
-      // Instanciation des 3 line charts
-      createLineChart(document.getElementById("lineChart1"));
-      createLineChart(document.getElementById("lineChart2"));
-      createLineChart(document.getElementById("lineChart3"));
+        // --- Fonction générique pour créer un line chart---
+        function createLineChart(ctx, label, color) {
+            return new Chart(ctx, {
+                type: "line",
+                data: {
+                    labels: [],  // contiendra les timestamps
+                    datasets: [{
+                        label: label,
+                        data: [],
+                        borderColor: color,
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Temps'
+                            }
+                        },
+                        y: {
+                            beginAtZero: false,
+                            title: {
+                                display: true,
+                                text: 'Température (°C)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Création des 3 line charts
+        let lineChart1 = createLineChart(lineCtx1, "Évolution Température Circuit Primaire", "#1C2942");
+        let lineChart2 = createLineChart(lineCtx2, "Évolution Température Circuit Secondaire", "#3B556D");
+        let lineChart3 = createLineChart(lineCtx3, "Évolution Température Circuit de Refroidissement", "#5FC2BA");
+
+        // --- Fonction pour charger les 20 dernières valeurs depuis l'API ---
+        async function fetchLatestData() {
+            try {
+                const response = await fetch("/api/temperatureData"); 
+                console.log("Appel des données température...");
+                // route qui retourne un JSON des 20 derniers enregistrements
+                const data = await response.json();
+
+                // data doit être un array d'objets : 
+                // ex: [{ temp_pipe1:..., temp_pipe2:..., temp_pipe3:..., timestamp}, ...]
+
+                // 1) Mettre à jour le BAR CHART (dernière valeur)
+                if (data.length > 0) {
+                    const latest = data[data.length - 1]; // le plus récent
+                    // Mettre à jour barChart
+                    barChart.data.datasets[0].data = [latest.temp_pipe1];
+                    barChart.data.datasets[1].data = [latest.temp_pipe2];
+                    barChart.data.datasets[2].data = [latest.temp_pipe3];
+                    barChart.update();
+                }
+
+                // 2) Mettre à jour les LINE CHARTS avec LES 20 DERNIÈRES valeurs
+                // On va créer des arrays séparés pour chaque capteur
+                let labels = data.map(d => d.timestamp.slice(11,19)); 
+                // "2024-01-26 12:34:56" => "12:34:56" par ex.
+
+                let valuesC1 = data.map(d => d.temp_pipe1);
+                let valuesC2 = data.map(d => d.temp_pipe2);
+                let valuesC3 = data.map(d => d.temp_pipe3);
+
+                // capteur 1
+                lineChart1.data.labels = labels;
+                lineChart1.data.datasets[0].data = valuesC1;
+                lineChart1.update();
+
+                // capteur 2
+                lineChart2.data.labels = labels;
+                lineChart2.data.datasets[0].data = valuesC2;
+                lineChart2.update();
+
+                // capteur 3
+                lineChart3.data.labels = labels;
+                lineChart3.data.datasets[0].data = valuesC3;
+                lineChart3.update();
+
+            } catch (error) {
+                console.error("Erreur fetchLatestData:", error);
+            }
+        }
+
+        // --- Appeler fetchLatestData régulièrement pour update ---
+        setInterval(fetchLatestData, 3000); // Toutes les 3 secondes
+        // Premier appel pour initialiser
+        fetchLatestData();
     </script>
-  </body>
+</body>
 </html>

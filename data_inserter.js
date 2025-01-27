@@ -1,4 +1,4 @@
-//fichier permettant une insertion regulière de nouvelles données pour simuler une mesure en temps reel
+// fichier permettant une insertion régulière de nouvelles données pour simuler une mesure en temps réel
 
 require('dotenv').config(); // Charger les variables d'environnement
 
@@ -13,17 +13,41 @@ const pool = new Pool({
     port: process.env.DB_PORT    
 });
 
-// Fonction pour générer des valeurs aléatoires réalistes
+// initialisation des valeurs de base pour chaque capteur (milieu de l'intervalle)
+let temp_pipe1 = 305;        // (290 + 320) / 2
+let temp_pipe2 = 280;        // (270 + 290) / 2
+let temp_pipe3 = 32.5;       // (25 + 40) / 2
+let pressure_valve1 = 148.5; // (140 + 157) / 2
+let pressure_valve2 = 55;     // (50 + 60) / 2
+let pressure_valve3 = 6;      // (2 + 10) / 2
+let radiation = 1.5;          // (0.5 + 2.5) / 2
+
+// Fonction pour générer un petit changement aléatoire
+function getRandomDelta(maxDelta) {
+    return (Math.random() * (2 * maxDelta) - maxDelta); // Entre -maxDelta et +maxDelta
+}
+
+// Fonction pour générer des données réalistes
 function generateRandomData() {
-    console.log("on a créé les données")
+    // Appliquer de petits changements à chaque capteur
+    temp_pipe1 = Math.min(320, Math.max(290, temp_pipe1 + getRandomDelta(1))); // ±1°C
+    temp_pipe2 = Math.min(290, Math.max(270, temp_pipe2 + getRandomDelta(1))); // ±1°C
+    temp_pipe3 = Math.min(40, Math.max(25, temp_pipe3 + getRandomDelta(0.5))); // ±0.5°C
+
+    pressure_valve1 = Math.min(157, Math.max(140, pressure_valve1 + getRandomDelta(0.5))); // ±0.5 bar
+    pressure_valve2 = Math.min(60, Math.max(50, pressure_valve2 + getRandomDelta(0.3)));  // ±0.3 bar
+    pressure_valve3 = Math.min(10, Math.max(2, pressure_valve3 + getRandomDelta(0.2)));   // ±0.2 bar
+
+    radiation = Math.min(2.5, Math.max(0.5, radiation + getRandomDelta(0.1)));         // ±0.1 µSv/h
+
     return {
-        temp_pipe1: (Math.random() * (320 - 290) + 290).toFixed(2),  // 290 à 320 degrés
-        temp_pipe2: (Math.random() * (290 - 270) + 270).toFixed(2),  // 270 à 290 degrés
-        temp_pipe3: (Math.random() * (40 - 25) + 25).toFixed(2),     // 25 à 40 degrés
-        pressure_valve1: (Math.random() * (157 - 140) + 140).toFixed(2), // 140 à 157 bars
-        pressure_valve2: (Math.random() * (60 - 50) + 50).toFixed(2), // 50 à 60 bars
-        pressure_valve3: (Math.random() * (10 - 2) + 2).toFixed(2),   // 2 à 10 bars
-        radiation: (Math.random() * (2.5 - 0.5) + 0.5).toFixed(3)     // 0.5 à 2.5 µSv/h
+        temp_pipe1: temp_pipe1.toFixed(2),
+        temp_pipe2: temp_pipe2.toFixed(2),
+        temp_pipe3: temp_pipe3.toFixed(2),
+        pressure_valve1: pressure_valve1.toFixed(2),
+        pressure_valve2: pressure_valve2.toFixed(2),
+        pressure_valve3: pressure_valve3.toFixed(2),
+        radiation: radiation.toFixed(3)
     };
 }
 
@@ -31,7 +55,7 @@ function generateRandomData() {
 async function insertData() {
     const data = generateRandomData();
     try {
-        console.log("avant insertion")
+        console.log("Avant insertion...");
         await pool.query(
             `INSERT INTO nuclear_measurements 
             (temp_pipe1, temp_pipe2, temp_pipe3, pressure_valve1, pressure_valve2, pressure_valve3, radiation, timestamp) 
@@ -52,7 +76,8 @@ async function insertData() {
     }
 }
 
-// Exécution de l'insertion toutes les 10 secondes
-setInterval(insertData, 10 * 1000);
+// Exécution de l'insertion toutes les 3 secondes
+const intervalMs = 3000; // 3 secondes
+setInterval(insertData, intervalMs);
 
 console.log("📡 Script d'insertion de données lancé. CTRL+C pour arrêter.");
