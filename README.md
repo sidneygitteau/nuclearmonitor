@@ -9,7 +9,7 @@ Video de présentation : https://youtu.be/UEIKXnJ5Hrs
 ## Technologies Utilisées
 
 - **Frontend :**
-  - HTML5 & CSS3
+  - HTML & CSS
   - JavaScript
   - [Chart.js](https://www.chartjs.org/) pour les graphiques
   - [Material Design Icons](https://materialdesignicons.com/) pour les icônes
