@@ -51,7 +51,7 @@ npm install
 ```
 Cela installera toutes les dépendances nécessaires listées dans le fichier package.json.
 ## Configuration
-###1. Configurer la Base de Données PostgreSQL
+### 1. Configurer la Base de Données PostgreSQL
 a. Créer la Base de Données
 
 Ouvrez pgAdmin 4 ou utilisez le terminal pour créer une base de données nommée nuclear_db :
@@ -86,7 +86,7 @@ DB_PASSWORD=votre_mot_de_passe
 DB_PORT=5432
 ```
 Remplacez votre_mot_de_passe par le mot de passe de votre utilisateur PostgreSQL.
-Démarrage de l'Application
+# Démarrage de l'Application
 ## 1. Démarrer le Serveur Node.js
 
 Dans le terminal, exécutez :
@@ -122,7 +122,7 @@ Ouvrez votre navigateur et accédez aux URL suivantes pour visualiser les donné
 
 Voici quelques idées pour rendre l'application encore meilleure :
 
-    Alertes en Temps Réel :
-        Mettre en place des notifications en cas de dépassement des seuils de pression ou de température.
-    Tests :
-        Ajouter des tests unitaires et d'intégration pour assurer la fiabilité de l'application.
+  Alertes en Temps Réel :
+      Mettre en place des notifications en cas de dépassement des seuils de pression ou de température.
+  Tests :
+      Ajouter des tests unitaires et d'intégration pour assurer la fiabilité de l'application.
