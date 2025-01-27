@@ -39,7 +39,7 @@ Avant de commencer, assurez-vous d'avoir installé les éléments suivants sur v
 Si vous utilisez Git, clonez le dépôt. Sinon, téléchargez et extrayez les fichiers du projet.
 
 ```bash
-git clone https://github.com/votre-utilisateur/nuclear-monitor.git
+git clone https://github.com/sidneygitteau/nuclear-monitor.git
 cd nuclear-monitor
 ```
 
