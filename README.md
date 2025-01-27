@@ -46,9 +46,9 @@ cd nuclear-monitor
 ### 2. Installer les Dépendances
 
 Assurez-vous d'être dans le répertoire du projet, puis exécutez :
-
+```
 npm install
-
+```
 Cela installera toutes les dépendances nécessaires listées dans le fichier package.json.
 ## Configuration
 ###1. Configurer la Base de Données PostgreSQL
